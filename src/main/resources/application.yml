@@ -1,0 +1,30 @@
+
+server:
+  port: 8012
+camel:
+  component:
+    kafka:
+      brokers: 192.168.0.104:9092
+      client-id: mysql-to-mssql-sync-listener
+      group-id: consumer-mysql-to-mssql-sync-listener
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: io.confluent.kafka.serializers.protobuf.KafkaProtobufDeserializer
+      value-serializer: io.confluent.kafka.serializers.protobuf.KafkaProtobufSerializer
+      schema-registry-u-r-l: http://192.168.0.104:8081
+      additional-properties:
+        "[specific.protobuf.value.type]": com.consumer.example.proto.OrderHistoryEvent
+
+spring:
+  application:
+    name: consumer
+  datasource:
+    url: jdbc:sqlserver://192.168.0.104:1433;encrypt=true;trustServerCertificate=true;databaseName=company
+    username: sa
+    password: India@2024
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        ddl-auto: update

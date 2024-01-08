@@ -1,0 +1,14 @@
+syntax = "proto3";
+package consumer;
+
+option java_package = "com.consumer.example.proto";
+option java_outer_classname = "OrderHistoryEventWrapper";
+option java_multiple_files = true;
+
+message OrderHistoryEvent {
+  string orderId = 1;
+  string orderName = 2;
+  string customerId = 3;
+  string order_status=4;
+  string operation = 5;
+}
